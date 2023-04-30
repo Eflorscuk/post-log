@@ -1,7 +1,6 @@
 const express = require("express")
 const app = express()
 const { engine } = require('express-handlebars')
-const Sequelize = require('sequelize')
 const bodyParser = require('body-parser')
 
 const port = 8084
@@ -15,16 +14,15 @@ app.set('views', './views')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-// DB Conn
-// const sequelize = new Sequelize()
-
 // Routes
 app.get('/register', (req, res) => {
     res.render('form')
 })
 
 app.post('/add', (req, res) => {
-    res.send('Formulário recebido')
+    const title = req.body.title
+    const content = req.body.content
+    res.send(`Test => Title: ${title} content: ${content}`)
 })
 
 app.listen(port, _ => console.log(`Listening on port ${port}!`))
