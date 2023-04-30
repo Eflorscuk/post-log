@@ -1,0 +1,24 @@
+{
+  "name": "post-log-project",
+  "version": "1.0.0",
+  "description": "Simple project abot post log",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "JS",
+    "Express",
+    "Sequelize",
+    "Mysql"
+  ],
+  "author": "Evandro Florscuk",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sequelize": "^6.31.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
