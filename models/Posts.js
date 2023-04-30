@@ -11,6 +11,9 @@ const Post = sequelize.define(tableName, {
     }
 })
 
+
+/**
+ * For study only
 async function tableExists(tableName) {
     const tableNames = await sequelize.getQueryInterface().showAllTables()
 
@@ -27,5 +30,5 @@ tableExists(tableName)
             console.log(`${tableName} created!`)
         }
     }).catch(err => console.log(err))
-
+*/
 module.exports = Post
