@@ -17,15 +17,16 @@ app.set('view engine', 'handlebars')
 app.set('views', './views')
 
 // Body Parser
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // Routes
-
 app.get('/', (req, res) => {
     Post.findAll().then(posts => {
         res.render('home', {posts: posts})
     })
+    // Descrecent order
+    // Post.findAll({ order: [['id', 'DESC']] })
 })
 
 app.get('/register', (req, res) => {
@@ -38,6 +39,12 @@ app.post('/add', (req, res) => {
         content: req.body.content
     })
         .then(_ => res.redirect('/'))
+        .catch(err => res.send('Error ', err))
+})
+
+app.get('/delete/:id', (req, res) => {
+    Post.destroy({ where: { 'id': req.params.id } })
+        .then(_ => res.send("Post Deleted"))
         .catch(err => res.send('Error ', err))
 })
 
