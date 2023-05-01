@@ -1,13 +1,18 @@
 const express = require("express")
 const app = express()
+const Handlebars = require('handlebars')
 const { engine } = require('express-handlebars')
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access')
 const bodyParser = require('body-parser')
 const Post = require('./models/Posts')
 
 const port = 8084
 
 // Template Engine
-app.engine('handlebars', engine({ defaultLayout: 'main' }))
+app.engine('handlebars', engine({ 
+    defaultLayout: 'main',
+    handlebars: allowInsecurePrototypeAccess(Handlebars) 
+}))
 app.set('view engine', 'handlebars')
 app.set('views', './views')
 
@@ -18,7 +23,9 @@ app.use(bodyParser.json())
 // Routes
 
 app.get('/', (req, res) => {
-    res.render('home')
+    Post.findAll().then(posts => {
+        res.render('home', {posts: posts})
+    })
 })
 
 app.get('/register', (req, res) => {
